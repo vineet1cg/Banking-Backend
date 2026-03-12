@@ -36,28 +36,34 @@ async function userRegistrationController(req,res){
 }
 // POST /api/auth/login
 async function userLoginController(req,res){
+
+    //get email and password from body 
     const {email,password} = req.body;
 
+    // get user details by email 
     const user = await userModel.findOne({email}).select("+password");
 
+    // if user doest not exists then we send back the unauthorized response
     if(!user){
         return res.status(400).json({
             message:"Unauthorized"
         });
     }
-
+    // if user is valid then we check if the passwrod is valid or not
     const isPasswordValid = await userModel.comparePassword(password);
-
+    //we compared the password and then stored it in a boolean 
+    //we check that boolean's value to check if the password is correct or not
     if(!isPasswordValid){
         return res.status(400).json({
           message: "Unauthorized",
         });
     };
 
+    //password is valid too so then we give them the token 
      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-
+    //it is always stored in cookies
      res.cookies("token", token);
-    
+    //send the response after the token is given 
       res.status(200).json({
         message: "User Login Successful",
         user: {
@@ -67,7 +73,6 @@ async function userLoginController(req,res){
         },
         token,
       });
-      
 }
 
-module.exports = {userRegistrationController};
+module.exports = {userRegistrationController,userLoginController};
