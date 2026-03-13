@@ -363,45 +363,34 @@
             <h2 class="section-title">7. Implementation Roadmap</h2>
             
             <div class="phase-card">
-                <h3><span class="phase-number">1</span> Phase 1: Foundation (Week 1)</h3>
+                <h3><span class="phase-number">1</span> Phase 1: Foundation (Day 1)</h3>
                 <ul class="bullet-list">
-                    <li>Project setup: React + Tailwind + Express</li>
-                    <li>Backend: MongoDB connection, user model</li>
-                    <li>Auth: Registration, Login APIs with JWT</li>
-                    <li>Frontend: React Router setup, Auth pages</li>
+                    <li>Project setup: React + Tailwind + Express + MongoDB</li>
+                    <li>Backend: User model, Auth APIs (Register/Login)</li>
+                    <li>JWT authentication with LocalStorage</li>
+                    <li>Frontend: React Router, Auth pages, Protected routes</li>
                     <li><strong>Delivers:</strong> Requirements 1, 2, 3, 4, 11</li>
                 </ul>
             </div>
             
             <div class="phase-card">
-                <h3><span class="phase-number">2</span> Phase 2: Core Features (Week 2)</h3>
+                <h3><span class="phase-number">2</span> Phase 2: Core Features (Day 2)</h3>
                 <ul class="bullet-list">
                     <li>Dashboard with account overview</li>
                     <li>Transaction CRUD operations</li>
-                    <li>Protected routes implementation</li>
-                    <li>Context API for global state</li>
-                    <li><strong>Delivers:</strong> Requirements 9, 10, 13</li>
+                    <li>Search, filter, sort functionality</li>
+                    <li>Pagination implementation</li>
+                    <li><strong>Delivers:</strong> Requirements 6, 7, 8, 9, 10, 13</li>
                 </ul>
             </div>
             
             <div class="phase-card">
-                <h3><span class="phase-number">3</span> Phase 3: Search & Pagination (Week 3)</h3>
+                <h3><span class="phase-number">3</span> Phase 3: UI Polish (Day 3)</h3>
                 <ul class="bullet-list">
-                    <li>Search functionality with debouncing</li>
-                    <li>Filter and sort options</li>
-                    <li>Backend pagination (limit/skip)</li>
-                    <li>Pagination UI controls</li>
-                    <li><strong>Delivers:</strong> Requirements 6, 7, 8</li>
-                </ul>
-            </div>
-            
-            <div class="phase-card">
-                <h3><span class="phase-number">4</span> Phase 4: UI Polish & Theme (Week 4)</h3>
-                <ul class="bullet-list">
-                    <li>Dark/Light mode toggle</li>
-                    <li>Theme persistence in localStorage</li>
+                    <li>Dark/Light mode toggle with localStorage</li>
                     <li>Responsive design optimization</li>
                     <li>Loading states & error handling</li>
+                    <li>Final testing & presentation prep</li>
                     <li><strong>Delivers:</strong> Requirements 5, 12</li>
                 </ul>
             </div>
@@ -413,7 +402,7 @@
                 <div class="metric-box"><div class="num">13/13</div><div class="lbl">Requirements Met</div></div>
                 <div class="metric-box"><div class="num">100%</div><div class="lbl">Tech Stack Coverage</div></div>
                 <div class="metric-box"><div class="num">100%</div><div class="lbl">Responsive</div></div>
-                <div class="metric-box"><div class="num">4</div><div class="lbl">Week Timeline</div></div>
+                <div class="metric-box"><div class="num">3</div><div class="lbl">Day Timeline</div></div>
             </div>
         </div>
 

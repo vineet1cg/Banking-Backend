@@ -182,15 +182,13 @@ Content-Type: application/json
 - Input validation
 - Rate limiting on requests
 
-## 📈 Product Roadmap
+## 📈 Hackathon Roadmap (3 Days)
 
 | Phase | Timeline | Focus Area |
 |-------|----------|------------|
-| Phase 1 | Weeks 1-4 | Authentication & Foundation |
-| Phase 2 | Weeks 5-10 | Core Banking Features |
-| Phase 3 | Weeks 11-16 | Financial Intelligence |
-| Phase 4 | Weeks 17-22 | Advanced Features |
-| Phase 5 | Weeks 23-26 | Scale & Optimization |
+| Phase 1 | Day 1 | Foundation - Auth, Setup, Routing |
+| Phase 2 | Day 2 | Core Features - CRUD, Search, Pagination |
+| Phase 3 | Day 3 | UI Polish - Theme, Responsive, Testing |
 
 ## 📝 License
 
