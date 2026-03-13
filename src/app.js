@@ -17,5 +17,5 @@ app.get("/", (req, res) => {
   });
 });
 app.use("/api/auth", authRoutes);
-
+console.log("GithubCheck");
 module.exports = app;
