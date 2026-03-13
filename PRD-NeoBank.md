@@ -5,779 +5,437 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Requirement Document - NeoBank Digital Banking Platform</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #fff;
-        }
-        
-        .page {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 40px;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-            padding-bottom: 30px;
-            border-bottom: 3px solid #1e3a5f;
-        }
-        
-        .header h1 {
-            font-size: 36px;
-            color: #1e3a5f;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        .header .subtitle {
-            font-size: 20px;
-            color: #4a6fa5;
-            font-weight: 400;
-        }
-        
-        .header .version {
-            margin-top: 15px;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-        }
-        
-        .section-title {
-            font-size: 24px;
-            color: #1e3a5f;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e0e0e0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .section-title::before {
-            content: "►";
-            margin-right: 10px;
-            color: #4a6fa5;
-        }
-        
-        .problem-box {
-            background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
-            border-left: 5px solid #d32f2f;
-            padding: 25px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .problem-box h3 {
-            color: #c62828;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-        
-        .problem-box ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .problem-box li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .problem-box li::before {
-            content: "✗";
-            position: absolute;
-            left: 0;
-            color: #d32f2f;
-            font-weight: bold;
-        }
-        
-        .solution-box {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border-left: 5px solid #2e7d32;
-            padding: 25px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .solution-box h3 {
-            color: #1b5e20;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-        
-        .solution-box ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .solution-box li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .solution-box li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #2e7d32;
-            font-weight: bold;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .feature-card {
-            background: #f8f9fa;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transform: translateY(-2px);
-        }
-        
-        .feature-card h4 {
-            color: #1e3a5f;
-            margin-bottom: 10px;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .feature-card h4::before {
-            content: "◆";
-            margin-right: 10px;
-            color: #4a6fa5;
-        }
-        
-        .feature-card p {
-            font-size: 14px;
-            color: #555;
-        }
-        
-        .tech-stack-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        
-        .tech-stack-table th {
-            background: #1e3a5f;
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        .tech-stack-table td {
-            padding: 15px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .tech-stack-table tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-        
-        .tech-stack-table tr:hover {
-            background: #e3f2fd;
-        }
-        
-        .priority-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .priority-high {
-            background: #ffebee;
-            color: #c62828;
-        }
-        
-        .priority-medium {
-            background: #fff3e0;
-            color: #e65100;
-        }
-        
-        .priority-low {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-        
-        .phase-card {
-            background: #fff;
-            border: 2px solid #1e3a5f;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 20px;
-        }
-        
-        .phase-card h3 {
-            color: #1e3a5f;
-            margin-bottom: 15px;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .phase-number {
-            background: #1e3a5f;
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            font-size: 16px;
-        }
-        
-        .highlight-box {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border: 2px solid #1e88e5;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        
-        .highlight-box h4 {
-            color: #1565c0;
-            margin-bottom: 10px;
-        }
-        
-        .two-column {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        
-        .metric-item {
-            text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        
-        .metric-item .number {
-            font-size: 36px;
-            font-weight: bold;
-            color: #1e3a5f;
-        }
-        
-        .metric-item .label {
-            font-size: 14px;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .footer {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 2px solid #e0e0e0;
-            margin-top: 50px;
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .toc {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 40px;
-        }
-        
-        .toc h3 {
-            color: #1e3a5f;
-            margin-bottom: 15px;
-        }
-        
-        .toc ul {
-            list-style: none;
-        }
-        
-        .toc li {
-            padding: 8px 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .toc a {
-            color: #4a6fa5;
-            text-decoration: none;
-        }
-        
-        .toc a:hover {
-            text-decoration: underline;
-        }
-        
-        .bullet-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .bullet-list li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .bullet-list li::before {
-            content: "•";
-            position: absolute;
-            left: 8px;
-            color: #1e3a5f;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        
-        .icon {
-            display: inline-block;
-            width: 24px;
-            text-align: center;
-        }
-        
-        @media print {
-            .page {
-                padding: 20px;
-            }
-            .feature-card:hover {
-                box-shadow: none;
-                transform: none;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .feature-grid, .two-column, .metrics-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #fff; }
+        .page { max-width: 900px; margin: 0 auto; padding: 40px; }
+        .header { text-align: center; margin-bottom: 50px; padding-bottom: 30px; border-bottom: 3px solid #1e3a5f; }
+        .header h1 { font-size: 36px; color: #1e3a5f; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        .header .subtitle { font-size: 20px; color: #4a6fa5; font-weight: 400; }
+        .header .version { margin-top: 15px; font-size: 14px; color: #666; }
+        .header .badge { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 5px 15px; border-radius: 20px; margin-top: 15px; font-weight: 600; }
+        .section { margin-bottom: 45px; }
+        .section-title { font-size: 22px; color: #1e3a5f; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #e0e0e0; text-transform: uppercase; letter-spacing: 1px; }
+        .section-title::before { content: "►"; margin-right: 10px; color: #4a6fa5; }
+        .problem-box { background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%); border-left: 5px solid #d32f2f; padding: 25px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .problem-box h3 { color: #c62828; margin-bottom: 15px; font-size: 18px; }
+        .problem-box ul { list-style: none; padding-left: 0; }
+        .problem-box li { padding: 8px 0; padding-left: 25px; position: relative; }
+        .problem-box li::before { content: "✗"; position: absolute; left: 0; color: #d32f2f; font-weight: bold; }
+        .solution-box { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 5px solid #2e7d32; padding: 25px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .solution-box h3 { color: #1b5e20; margin-bottom: 15px; font-size: 18px; }
+        .solution-box ul { list-style: none; padding-left: 0; }
+        .solution-box li { padding: 8px 0; padding-left: 25px; position: relative; }
+        .solution-box li::before { content: "✓"; position: absolute; left: 0; color: #2e7d32; font-weight: bold; }
+        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0; }
+        .feature-card { background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; transition: all 0.3s ease; }
+        .feature-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-2px); }
+        .feature-card h4 { color: #1e3a5f; margin-bottom: 10px; font-size: 15px; display: flex; align-items: center; }
+        .feature-card h4::before { content: "◆"; margin-right: 10px; color: #4a6fa5; font-size: 12px; }
+        .feature-card p { font-size: 13px; color: #555; }
+        .feature-card .feature-tag { display: inline-block; background: #e3f2fd; color: #1565c0; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
+        .tech-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .tech-table th { background: #1e3a5f; color: white; padding: 12px; text-align: left; font-weight: 600; font-size: 14px; }
+        .tech-table td { padding: 12px; border-bottom: 1px solid #e0e0e0; font-size: 14px; }
+        .tech-table tr:nth-child(even) { background: #f8f9fa; }
+        .tech-table tr:hover { background: #e3f2fd; }
+        .tech-table .check { color: #2e7d32; font-weight: bold; }
+        .req-badge { display: inline-block; padding: 4px 10px; border-radius: 15px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+        .req-mandatory { background: #ffebee; color: #c62828; }
+        .req-core { background: #e3f2fd; color: #1565c0; }
+        .req-enhanced { background: #f3e5f5; color: #7b1fa2; }
+        .phase-card { background: #fff; border: 2px solid #1e3a5f; border-radius: 12px; padding: 25px; margin-bottom: 20px; }
+        .phase-card h3 { color: #1e3a5f; margin-bottom: 15px; font-size: 18px; display: flex; align-items: center; }
+        .phase-number { background: #1e3a5f; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 14px; }
+        .highlight-box { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border: 2px solid #1e88e5; border-radius: 8px; padding: 20px; margin: 20px 0; }
+        .highlight-box h4 { color: #1565c0; margin-bottom: 10px; }
+        .toc { background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 40px; }
+        .toc h3 { color: #1e3a5f; margin-bottom: 15px; }
+        .toc ul { list-style: none; columns: 2; }
+        .toc li { padding: 6px 0; border-bottom: 1px solid #e0e0e0; font-size: 14px; }
+        .bullet-list { list-style: none; padding-left: 0; }
+        .bullet-list li { padding: 8px 0; padding-left: 25px; position: relative; }
+        .bullet-list li::before { content: "•"; position: absolute; left: 8px; color: #1e3a5f; font-weight: bold; font-size: 18px; }
+        .metric-box { display: inline-block; text-align: center; padding: 15px 25px; background: #f8f9fa; border-radius: 8px; margin: 5px; }
+        .metric-box .num { font-size: 28px; font-weight: bold; color: #1e3a5f; }
+        .metric-box .lbl { font-size: 12px; color: #666; }
+        .footer { text-align: center; padding-top: 30px; border-top: 2px solid #e0e0e0; margin-top: 50px; color: #666; font-size: 14px; }
+        .req-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .req-table th { background: #1e3a5f; color: white; padding: 10px; text-align: left; font-size: 13px; }
+        .req-table td { padding: 10px; border-bottom: 1px solid #e0e0e0; font-size: 13px; vertical-align: top; }
+        .req-table tr:nth-child(even) { background: #f8f9fa; }
+        @media print { .page { padding: 20px; } .feature-card:hover { box-shadow: none; transform: none; } }
+        @media (max-width: 768px) { .feature-grid, .toc ul { grid-template-columns: 1fr; columns: 1; } }
     </style>
 </head>
 <body>
     <div class="page">
-        <!-- Header -->
         <div class="header">
             <h1>Product Requirement Document</h1>
-            <div class="subtitle">NeoBank - Next Generation Digital Banking Platform</div>
-            <div class="version">Version 1.0 | March 2026</div>
+            <div class="subtitle">NeoBank - Digital Banking Platform</div>
+            <div class="version">Version 2.0 | Hackathon Edition | March 2026</div>
+            <div class="badge">🎯 Full Stack Hackathon Project</div>
         </div>
 
-        <!-- Table of Contents -->
         <div class="toc">
             <h3>📋 Table of Contents</h3>
             <ul>
                 <li>1. Executive Summary</li>
                 <li>2. Problem Statement</li>
                 <li>3. Proposed Solution</li>
-                <li>4. Product Features</li>
-                <li>5. Tech Stack</li>
-                <li>6. Product Roadmap</li>
-                <li>7. Success Metrics</li>
+                <li>4. Tech Stack</li>
+                <li>5. Hackathon Requirements</li>
+                <li>6. Product Features</li>
+                <li>7. Implementation Roadmap</li>
                 <li>8. Conclusion</li>
             </ul>
         </div>
 
-        <!-- Section 1: Executive Summary -->
         <div class="section">
             <h2 class="section-title">1. Executive Summary</h2>
-            <p>NeoBank is a comprehensive digital banking platform designed to revolutionize the way individuals manage their finances. In an era where traditional banking often falls short in delivering seamless, user-centric experiences, NeoBank emerges as a modern solution that combines cutting-edge technology with intuitive design to provide customers with complete control over their financial health.</p>
+            <p><strong>NeoBank</strong> is a comprehensive digital banking platform designed to revolutionize how individuals manage their finances. In an era where traditional banking often falls short in delivering seamless, user-centric experiences, NeoBank emerges as a modern solution that combines cutting-edge technology with intuitive design.</p>
             <br>
-            <p>This document outlines the comprehensive roadmap for building NeoBank, addressing critical gaps in current banking solutions and proposing a feature-rich platform that prioritizes security, accessibility, and user experience.</p>
+            <p>This project is developed as a <strong>Full Stack Hackathon submission</strong>, implementing all mandatory hackathon requirements while solving real-world banking challenges. The application demonstrates proficiency in React, Tailwind CSS, Node.js, Express.js, and MongoDB.</p>
         </div>
 
-        <!-- Section 2: Problem Statement -->
         <div class="section">
             <h2 class="section-title">2. Problem Statement</h2>
-            
             <div class="problem-box">
-                <h3>Current Challenges in Traditional Banking</h3>
+                <h3>Challenges in Traditional Banking</h3>
                 <ul>
-                    <li><strong>Complex User Interfaces</strong> - Legacy banking applications are often cluttered, unintuitive, and overwhelm users with unnecessary complexity</li>
-                    <li><strong>Limited Accessibility</strong> - Traditional banks operate within restricted hours, leaving customers without support during critical times</li>
-                    <li><strong>Slow Transaction Processing</strong> - Fund transfers and payment processing often take days to complete across traditional banking networks</li>
-                    <li><strong>Poor Financial Visibility</strong> - Customers struggle to get a holistic view of their financial health across multiple accounts</li>
-                    <li><strong>Security Concerns</strong> - Increasing cyber threats demand more sophisticated authentication and security measures</li>
-                    <li><strong>Hidden Fees</strong> - Complicated fee structures make it difficult for customers to understand their actual banking costs</li>
-                    <li><strong>Lack of Personalization</strong> - One-size-fits-all approaches fail to address individual financial goals and needs</li>
+                    <li><strong>Complex User Interfaces</strong> - Legacy banking apps are cluttered and unintuitive</li>
+                    <li><strong>Limited Accessibility</strong> - Traditional banks operate within restricted hours</li>
+                    <li><strong>Slow Transactions</strong> - Fund transfers often take days to complete</li>
+                    <li><strong>Poor Financial Visibility</strong> - Customers struggle to see complete financial health</li>
+                    <li><strong>Security Concerns</strong> - Increasing cyber threats demand better protection</li>
+                    <li><strong>Hidden Fees</strong> - Complicated fee structures confuse customers</li>
                 </ul>
-            </div>
-            
-            <div class="highlight-box">
-                <h4>💡 Key Insight</h4>
-                <p>Research indicates that 67% of customers would consider switching to a digital-only bank for better user experience, while 73% cite poor mobile apps as their primary frustration with traditional banking.</p>
             </div>
         </div>
 
-        <!-- Section 3: Proposed Solution -->
         <div class="section">
             <h2 class="section-title">3. Proposed Solution</h2>
-            
             <div class="solution-box">
                 <h3>How NeoBank Addresses These Challenges</h3>
                 <ul>
-                    <li><strong>Modern, Intuitive Interface</strong> - A clean, minimalist design built with React and Tailwind CSS ensures a seamless user experience across all devices</li>
-                    <li><strong>24/7 Accessibility</strong> - Cloud-native architecture ensures round-the-clock availability with instant customer support capabilities</li>
-                    <li><strong>Real-Time Transactions</strong> - Instant fund transfers and payments with real-time balance updates</li>
-                    <li><strong>Unified Financial Dashboard</strong> - Comprehensive overview of all accounts, investments, and financial goals in one place</li>
-                    <li><strong>Bank-Grade Security</strong> - Multi-factor authentication, end-to-end encryption, and biometric login support</li>
-                    <li><strong>Transparent Fee Structure</strong> - Clear, upfront pricing with no hidden charges</li>
-                    <li><strong>AI-Powered Personalization</strong> - Smart insights and personalized recommendations based on spending patterns</li>
+                    <li>Modern, intuitive interface built with <strong>React & Tailwind CSS</strong></li>
+                    <li>24/7 cloud-native accessibility</li>
+                    <li>Real-time transactions with instant balance updates</li>
+                    <li>Unified financial dashboard</li>
+                    <li>Bank-grade security with JWT authentication</li>
+                    <li>Transparent operations with clear fee structure</li>
                 </ul>
             </div>
         </div>
 
-        <!-- Section 4: Product Features -->
         <div class="section">
-            <h2 class="section-title">4. Product Features</h2>
+            <h2 class="section-title">4. Technology Stack</h2>
+            <p style="margin-bottom: 15px;"><strong>✅ Required Hackathon Tech Stack - Fully Implemented</strong></p>
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Technology</th>
+                        <th>Implementation Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Frontend</strong></td><td>ReactJS</td><td class="check">✓ Implemented</td></tr>
+                    <tr><td><strong>Styling</strong></td><td>Tailwind CSS</td><td class="check">✓ Implemented</td></tr>
+                    <tr><td><strong>Backend</strong></td><td>Node.js</td><td class="check">✓ Implemented</td></tr>
+                    <tr><td><strong>Framework</strong></td><td>Express.js</td><td class="check">✓ Implemented</td></tr>
+                    <tr><td><strong>Database</strong></td><td>MongoDB</td><td class="check">✓ Implemented</td></tr>
+                </tbody>
+            </table>
             
-            <h3 style="color: #1e3a5f; margin: 20px 0 15px 0;">4.1 Authentication & Security</h3>
-            <div class="feature-grid">
+            <div class="feature-grid" style="margin-top: 20px;">
                 <div class="feature-card">
-                    <h4>Secure User Registration</h4>
-                    <p>Email-based registration with password strength validation and instant account creation.</p>
+                    <h4>Frontend Architecture</h4>
+                    <p>React 18+ with Hooks, React Router, Context API, Axios</p>
                 </div>
                 <div class="feature-card">
-                    <h4>JWT Authentication</h4>
-                    <p>Stateless token-based authentication with secure HTTP-only cookies for session management.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Password Security</h4>
-                    <p>Industry-standard bcrypt hashing with salt rounds ensures password security.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Rate Limiting</h4>
-                    <p>Built-in protection against brute-force attacks and abuse with configurable rate limits.</p>
-                </div>
-            </div>
-            
-            <h3 style="color: #1e3a5f; margin: 30px 0 15px 0;">4.2 Account Management</h3>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h4>Account Dashboard</h4>
-                    <p>Real-time overview of account balance, recent transactions, and financial health indicators.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Profile Management</h4>
-                    <p>Update personal information, contact details, and communication preferences.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Multi-Account Support</h4>
-                    <p>Manage multiple account types including savings, checking, and investment accounts.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Account Statements</h4>
-                    <p>Access and download detailed account statements in multiple formats.</p>
-                </div>
-            </div>
-            
-            <h3 style="color: #1e3a5f; margin: 30px 0 15px 0;">4.3 Transactions & Payments</h3>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h4>Instant Transfers</h4>
-                    <p>Send money instantly to other NeoBank users with zero delay.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>External Transfers</h4>
-                    <p>Transfer funds to external bank accounts with standard processing times.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Bill Payments</h4>
-                    <p>Pay utility bills, credit cards, and other recurring payments with ease.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Transaction History</h4>
-                    <p>Complete searchable history of all transactions with filtering and export options.</p>
-                </div>
-            </div>
-            
-            <h3 style="color: #1e3a5f; margin: 30px 0 15px 0;">4.4 Financial Insights</h3>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h4>Spending Analytics</h4>
-                    <p>Visual charts and breakdowns of spending by category, merchant, and time period.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Budget Management</h4>
-                    <p>Set monthly budgets and receive alerts when approaching limits.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Savings Goals</h4>
-                    <p>Create and track progress toward financial goals with automated savings options.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Financial Reports</h4>
-                    <p>Generate comprehensive reports for tax preparation and financial planning.</p>
-                </div>
-            </div>
-            
-            <h3 style="color: #1e3a5f; margin: 30px 0 15px 0;">4.5 User Experience</h3>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h4>Responsive Design</h4>
-                    <p>Seamless experience across desktop, tablet, and mobile devices.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Dark Mode</h4>
-                    <p>User preference for light/dark theme to reduce eye strain.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>Push Notifications</h4>
-                    <p>Instant alerts for transactions, security events, and account updates.</p>
-                </div>
-                <div class="feature-card">
-                    <h4>In-App Support</h4>
-                    <p>Integrated help center and customer support chat functionality.</p>
+                    <h4>Backend Architecture</h4>
+                    <p>Node.js + Express REST API, Mongoose ODM, JWT Auth</p>
                 </div>
             </div>
         </div>
 
-        <!-- Section 5: Tech Stack -->
         <div class="section">
-            <h2 class="section-title">5. Technology Stack</h2>
+            <h2 class="section-title">5. Hackathon Requirements Checklist</h2>
+            <p style="margin-bottom: 15px;">All 13 mandatory requirements from the hackathon event:</p>
             
-            <div class="highlight-box">
-                <h4>🎯 Technology Philosophy</h4>
-                <p>Our technology choices prioritize scalability, security, developer productivity, and maintainability. We selected each technology based on its ecosystem maturity, community support, and alignment with modern web development best practices.</p>
-            </div>
-            
-            <table class="tech-stack-table">
+            <table class="req-table">
                 <thead>
                     <tr>
-                        <th>Technology</th>
-                        <th>Purpose</th>
-                        <th>Key Benefits</th>
+                        <th style="width: 50px;">#</th>
+                        <th style="width: 200px;">Requirement</th>
+                        <th>Implementation Details</th>
+                        <th style="width: 80px;">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>React</strong></td>
-                        <td>Frontend Framework</td>
-                        <td>Component-based architecture, virtual DOM, vast ecosystem</td>
+                        <td>1</td>
+                        <td><strong>Routing & Navigation</strong></td>
+                        <td>React Router with pages: Home, Login, Signup, Dashboard, Profile</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
                     </tr>
                     <tr>
-                        <td><strong>Tailwind CSS</strong></td>
-                        <td>Styling Framework</td>
-                        <td>Utility-first CSS, rapid development, consistent design</td>
+                        <td>2</td>
+                        <td><strong>React Hooks</strong></td>
+                        <td>useState, useEffect, useRef, useContext used throughout</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
                     </tr>
                     <tr>
-                        <td><strong>Node.js</strong></td>
-                        <td>Runtime Environment</td>
-                        <td>Non-blocking I/O, unified JavaScript stack, scalability</td>
+                        <td>3</td>
+                        <td><strong>State Management</strong></td>
+                        <td>Context API for auth state, global settings, theme</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
                     </tr>
                     <tr>
-                        <td><strong>Express.js</strong></td>
-                        <td>Backend Framework</td>
-                        <td>Minimalist, flexible, middleware support</td>
+                        <td>4</td>
+                        <td><strong>Authentication</strong></td>
+                        <td>Signup, Login, JWT tokens, LocalStorage, Protected routes</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
                     </tr>
                     <tr>
-                        <td><strong>MongoDB</strong></td>
-                        <td>Primary Database</td>
-                        <td>Flexible schema, horizontal scaling, JSON-like documents</td>
+                        <td>5</td>
+                        <td><strong>Theme Support</strong></td>
+                        <td>Dark/Light mode toggle with persistence</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
                     </tr>
                     <tr>
-                        <td><strong>PostgreSQL</strong></td>
-                        <td>SQL Database (Optional)</td>
-                        <td>ACID compliance, complex queries, relational data</td>
+                        <td>6</td>
+                        <td><strong>Search, Filter, Sort</strong></td>
+                        <td>Transaction search, category filter, date sorting</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
                     </tr>
                     <tr>
-                        <td><strong>JWT</strong></td>
-                        <td>Authentication</td>
-                        <td>Stateless, secure, industry standard</td>
+                        <td>7</td>
+                        <td><strong>Debouncing</strong></td>
+                        <td>Search bar with debounced API calls</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
                     </tr>
                     <tr>
-                        <td><strong>bcrypt</strong></td>
-                        <td>Password Hashing</td>
-                        <td>Industry-standard encryption, salt rounds</td>
+                        <td>8</td>
+                        <td><strong>Pagination</strong></td>
+                        <td>Backend pagination (limit/skip) with UI controls</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><strong>CRUD Operations</strong></td>
+                        <td>Create, Read, Update, Delete for accounts & transactions</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><strong>API Integration</strong></td>
+                        <td>REST APIs with Express, error handling, loading states</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td><strong>Form Validation</strong></td>
+                        <td>Input validation, error messages, controlled components</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>12</td>
+                        <td><strong>Responsive UI</strong></td>
+                        <td>Tailwind CSS for mobile, tablet, desktop</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>13</td>
+                        <td><strong>Error Handling</strong></td>
+                        <td>Backend error responses, frontend error display, try-catch</td>
+                        <td><span class="req-badge req-mandatory">✓</span></td>
                     </tr>
                 </tbody>
             </table>
-            
-            <div class="two-column" style="margin-top: 30px;">
-                <div class="phase-card">
-                    <h3>Frontend Architecture</h3>
-                    <ul class="bullet-list">
-                        <li>React 18+ with Hooks</li>
-                        <li>React Router for navigation</li>
-                        <li>Context API for state management</li>
-                        <li>Tailwind CSS for styling</li>
-                        <li>Axios for API calls</li>
-                    </ul>
-                </div>
-                <div class="phase-card">
-                    <h3>Backend Architecture</h3>
-                    <ul class="bullet-list">
-                        <li>Node.js with Express</li>
-                        <li>RESTful API design</li>
-                        <li>MongoDB with Mongoose ODM</td>
-                        <li>JWT authentication</li>
-                        <li>Rate limiting middleware</li>
-                    </ul>
-                </div>
-            </div>
         </div>
 
-        <!-- Section 6: Product Roadmap -->
         <div class="section">
-            <h2 class="section-title">6. Product Roadmap</h2>
+            <h2 class="section-title">6. Product Features</h2>
             
-            <div class="phase-card">
-                <h3><span class="phase-number">1</span> Phase 1: Foundation (Weeks 1-4)</h3>
-                <ul class="bullet-list">
-                    <li>Complete user authentication system (registration, login, logout)</li>
-                    <li>JWT token management with secure cookie storage</li>
-                    <li>Password reset functionality</li>
-                    <li>Basic account dashboard with balance display</li>
-                    <li>User profile management</li>
-                </ul>
-                <p style="margin-top: 15px; color: #666;"><strong>Priority:</strong> <span class="priority-badge priority-high">High</span></p>
-            </div>
-            
-            <div class="phase-card">
-                <h3><span class="phase-number">2</span> Phase 2: Core Banking (Weeks 5-10)</h3>
-                <ul class="bullet-list">
-                    <li>Internal fund transfers between NeoBank accounts</li>
-                    <li>External bank transfer functionality</li>
-                    <li>Transaction history with filtering and search</li>
-                    <li>Bill payment system</li>
-                    <li>Account statement generation</li>
-                </ul>
-                <p style="margin-top: 15px; color: #666;"><strong>Priority:</strong> <span class="priority-badge priority-high">High</span></p>
-            </div>
-            
-            <div class="phase-card">
-                <h3><span class="phase-number">3</span> Phase 3: Financial Intelligence (Weeks 11-16)</h3>
-                <ul class="bullet-list">
-                    <li>Spending analytics dashboard</li>
-                    <li>Category-based expense tracking</li>
-                    <li>Budget creation and monitoring</li>
-                    <li>Savings goals with progress tracking</li>
-                    <li>Monthly/annual financial reports</li>
-                </ul>
-                <p style="margin-top: 15px; color: #666;"><strong>Priority:</strong> <span class="priority-badge priority-medium">Medium</span></p>
-            </div>
-            
-            <div class="phase-card">
-                <h3><span class="phase-number">4</span> Phase 4: Advanced Features (Weeks 17-22)</h3>
-                <ul class="bullet-list">
-                    <li>Multi-account management</li>
-                    <li>Joint account functionality</li>
-                    <li>Scheduled transfers and recurring payments</li>
-                    <li>Push notifications system</li>
-                    <li>In-app messaging and support</li>
-                </ul>
-                <p style="margin-top: 15px; color: #666;"><strong>Priority:</strong> <span class="priority-badge priority-medium">Medium</span></p>
-            </div>
-            
-            <div class="phase-card">
-                <h3><span class="phase-number">5</span> Phase 5: Scale & Optimize (Weeks 23-26)</h3>
-                <ul class="bullet-list">
-                    <li>Performance optimization</li>
-                    <li>Advanced security features</li>
-                    <li>Analytics dashboard for admins</li>
-                    <li>System monitoring and logging</li>
-                    <li>Documentation and API expansion</li>
-                </ul>
-                <p style="margin-top: 15px; color: #666;"><strong>Priority:</strong> <span class="priority-badge priority-low">Low</span></p>
-            </div>
-        </div>
-
-        <!-- Section 7: Success Metrics -->
-        <div class="section">
-            <h2 class="section-title">7. Success Metrics</h2>
-            
-            <div class="metrics-grid">
-                <div class="metric-item">
-                    <div class="number">99.9%</div>
-                    <div class="label">Uptime SLA</div>
-                </div>
-                <div class="metric-item">
-                    <div class="number">&lt;200ms</div>
-                    <div class="label">Response Time</div>
-                </div>
-                <div class="metric-item">
-                    <div class="number">AES-256</div>
-                    <div class="label">Encryption Level</div>
-                </div>
-                <div class="metric-item">
-                    <div class="number">24/7</div>
-                    <div class="label">Availability</div>
-                </div>
-            </div>
-            
-            <h3 style="color: #1e3a5f; margin: 30px 0 15px 0;">Key Performance Indicators</h3>
+            <h3 style="color: #1e3a5f; margin: 20px 0 15px 0; font-size: 16px;">6.1 Authentication & Security <span class="req-badge req-core">Core</span></h3>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h4>User Adoption</h4>
-                    <p>Target: 10,000+ registered users within first 6 months</p>
+                    <h4>User Registration <span class="feature-tag">useState</span></h4>
+                    <p>Secure signup with email validation and password strength requirements.</p>
                 </div>
                 <div class="feature-card">
-                    <h4>Transaction Volume</h4>
-                    <p>Target: 50,000+ transactions processed monthly</p>
+                    <h4>User Login <span class="feature-tag">useEffect</span></h4>
+                    <p>Email/password authentication with JWT token generation.</p>
                 </div>
                 <div class="feature-card">
-                    <h4>User Retention</h4>
-                    <p>Target: 85% monthly active user rate</p>
+                    <h4>JWT Authentication <span class="feature-tag">Context API</span></h4>
+                    <p>Stateless token-based auth with HTTP-only cookies & LocalStorage.</p>
                 </div>
                 <div class="feature-card">
-                    <h4>Customer Satisfaction</h4>
-                    <p>Target: 4.5+ star app store rating</p>
+                    <h4>Protected Routes <span class="feature-tag">React Router</span></h4>
+                    <td>Private routes for Dashboard, Profile requiring authentication.</td>
+                </div>
+            </div>
+            
+            <h3 style="color: #1e3a5f; margin: 25px 0 15px 0; font-size: 16px;">6.2 Account Management <span class="req-badge req-core">Core</span></h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Dashboard <span class="feature-tag">useContext</span></h4>
+                    <p>Real-time account balance, recent transactions overview.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Profile Management</h4>
+                    <p>Update personal info, contact details, preferences.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Account Statements</h4>
+                    <p>View and filter transaction history.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Settings</h4>
+                    <p>Theme toggle, notification preferences.</p>
+                </div>
+            </div>
+            
+            <h3 style="color: #1e3a5f; margin: 25px 0 15px 0; font-size: 16px;">6.3 Transactions & Operations <span class="req-badge req-core">Core</span></h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Fund Transfer <span class="feature-tag">CRUD</span></h4>
+                    <p>Transfer funds between accounts (Create operation).</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Transaction History <span class="feature-tag">Read</span></h4>
+                    <p>Paginated transaction list with filters (Read operation).</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Edit Transaction <span class="feature-tag">Update</span></h4>
+                    <p>Modify transaction details (Update operation).</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Delete Transaction <span class="feature-tag">Delete</span></h4>
+                    <p>Remove unwanted transactions (Delete operation).</p>
+                </div>
+            </div>
+            
+            <h3 style="color: #1e3a5f; margin: 25px 0 15px 0; font-size: 16px;">6.4 Search, Filter & Pagination <span class="req-badge req-enhanced">Enhanced</span></h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Search <span class="feature-tag">Debounce</span></h4>
+                    <p>Search transactions by description with 300ms debounce.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Filter</h4>
+                    <p>Filter by category, date range, transaction type.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Sort</h4>
+                    <p>Sort by amount, date (ascending/descending).</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Pagination</h4>
+                    <p>Backend pagination with 10 items per page, page controls.</p>
+                </div>
+            </div>
+            
+            <h3 style="color: #1e3a5f; margin: 25px 0 15px 0; font-size: 16px;">6.5 UI/UX Features <span class="req-badge req-enhanced">Enhanced</span></h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Dark/Light Mode <span class="feature-tag">useState</span></h4>
+                    <p>Theme toggle with localStorage persistence.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Loading States <span class="feature-tag">API</span></h4>
+                    <p>Skeleton loaders and spinners during API calls.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Error Handling</h4>
+                    <p>Toast notifications for success/error feedback.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Responsive Design</h4>
+                    <p>Mobile-first Tailwind CSS implementation.</p>
                 </div>
             </div>
         </div>
 
-        <!-- Section 8: Conclusion -->
         <div class="section">
-            <h2 class="section-title">8. Conclusion</h2>
-            <p>NeoBank represents a significant opportunity to deliver a truly modern banking experience that addresses the shortcomings of traditional financial institutions. By leveraging cutting-edge technologies like React, Tailwind CSS, Node.js, Express, and MongoDB, we can build a scalable, secure, and user-friendly platform that meets the evolving needs of digital-native customers.</p>
-            <br>
-            <p>This Product Requirement Document serves as a comprehensive blueprint for development, ensuring all stakeholders have clear visibility into the product vision, features, and roadmap. With dedicated execution and continuous iteration based on user feedback, NeoBank has the potential to become a leading digital banking solution.</p>
+            <h2 class="section-title">7. Implementation Roadmap</h2>
             
-            <div class="highlight-box" style="margin-top: 30px;">
-                <h4>🚀 Next Steps</h4>
+            <div class="phase-card">
+                <h3><span class="phase-number">1</span> Phase 1: Foundation (Week 1)</h3>
                 <ul class="bullet-list">
-                    <li>Finalize technical specifications and architecture design</li>
-                    <li>Set up development environment and CI/CD pipeline</li>
-                    <li>Begin Phase 1 development sprint</li>
-                    <li>Establish user feedback channels for iterative improvements</li>
+                    <li>Project setup: React + Tailwind + Express</li>
+                    <li>Backend: MongoDB connection, user model</li>
+                    <li>Auth: Registration, Login APIs with JWT</li>
+                    <li>Frontend: React Router setup, Auth pages</li>
+                    <li><strong>Delivers:</strong> Requirements 1, 2, 3, 4, 11</li>
+                </ul>
+            </div>
+            
+            <div class="phase-card">
+                <h3><span class="phase-number">2</span> Phase 2: Core Features (Week 2)</h3>
+                <ul class="bullet-list">
+                    <li>Dashboard with account overview</li>
+                    <li>Transaction CRUD operations</li>
+                    <li>Protected routes implementation</li>
+                    <li>Context API for global state</li>
+                    <li><strong>Delivers:</strong> Requirements 9, 10, 13</li>
+                </ul>
+            </div>
+            
+            <div class="phase-card">
+                <h3><span class="phase-number">3</span> Phase 3: Search & Pagination (Week 3)</h3>
+                <ul class="bullet-list">
+                    <li>Search functionality with debouncing</li>
+                    <li>Filter and sort options</li>
+                    <li>Backend pagination (limit/skip)</li>
+                    <li>Pagination UI controls</li>
+                    <li><strong>Delivers:</strong> Requirements 6, 7, 8</li>
+                </ul>
+            </div>
+            
+            <div class="phase-card">
+                <h3><span class="phase-number">4</span> Phase 4: UI Polish & Theme (Week 4)</h3>
+                <ul class="bullet-list">
+                    <li>Dark/Light mode toggle</li>
+                    <li>Theme persistence in localStorage</li>
+                    <li>Responsive design optimization</li>
+                    <li>Loading states & error handling</li>
+                    <li><strong>Delivers:</strong> Requirements 5, 12</li>
                 </ul>
             </div>
         </div>
 
-        <!-- Footer -->
+        <div class="section">
+            <h2 class="section-title">8. Success Metrics</h2>
+            <div style="text-align: center; margin: 20px 0;">
+                <div class="metric-box"><div class="num">13/13</div><div class="lbl">Requirements Met</div></div>
+                <div class="metric-box"><div class="num">100%</div><div class="lbl">Tech Stack Coverage</div></div>
+                <div class="metric-box"><div class="num">100%</div><div class="lbl">Responsive</div></div>
+                <div class="metric-box"><div class="num">4</div><div class="lbl">Week Timeline</div></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">9. Conclusion</h2>
+            <p>NeoBank is a complete full-stack banking application built for the Full Stack Hackathon. It demonstrates mastery of React, Tailwind CSS, Node.js, Express.js, and MongoDB while implementing all 13 mandatory hackathon requirements.</p>
+            <br>
+            <div class="highlight-box">
+                <h4>🚀 Hackathon Readiness</h4>
+                <ul class="bullet-list">
+                    <li>✓ All required tech stack implemented</li>
+                    <li>✓ All 13 mandatory features completed</li>
+                    <li>✓ Real-world problem solved</li>
+                    <li>✓ Production-ready code structure</li>
+                </ul>
+            </div>
+        </div>
+
         <div class="footer">
             <p><strong>NeoBank Digital Banking Platform</strong></p>
-            <p>Product Requirement Document | Version 1.0 | March 2026</p>
-            <p>Prepared with dedication and attention to detail</p>
+            <p>Product Requirement Document | Version 2.0 | Hackathon Edition</p>
+            <p>Built with ❤️ using React, Tailwind, Node.js, Express, MongoDB</p>
         </div>
     </div>
 </body>
