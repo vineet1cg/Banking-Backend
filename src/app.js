@@ -1,21 +1,32 @@
-const express = require("express");
-const app = express();
-const authRoutes = require("./routes/auth.routes");
-const cookieParser = require("cookie-parser");
+const express = require("express")
+const cookieParser = require("cookie-parser")
+const cors = require("cors")
 
 
-//middleware
-app.use(express.json());
-app.use(cookieParser());
 
+const app = express()
 
-//routes
+app.use(cors())
+app.use(express.json())
+app.use(cookieParser())
+
+/**
+ * - Routes required
+ */
+const authRouter = require("./routes/auth.routes")
+const accountRouter = require("./routes/account.routes")
+const transactionRoutes = require("./routes/transaction.routes")
+
+/**
+ * - Use Routes
+ */
+
 app.get("/", (req, res) => {
-  res.send("Hello World");
-  return res.status(200).json({
-    message: "Backend Works :D",
-  });
-});
-app.use("/api/auth", authRoutes);
-console.log("GithubCheck");
-module.exports = app;
+    res.send("Ledger Service is up and running")
+})
+
+app.use("/api/auth", authRouter)
+app.use("/api/accounts", accountRouter)
+app.use("/api/transactions", transactionRoutes)
+
+module.exports = app

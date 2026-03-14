@@ -1,78 +1,116 @@
-const userModel = require('../models/user.model');
-const jwt = require('jsonwebtoken');
+const userModel = require("../models/user.model")
+const jwt = require("jsonwebtoken")
+const emailService = require("../services/email.service")
+const tokenBlackListModel = require("../models/blackList.model")
 
+/**
+* - user register controller
+* - POST /api/auth/register
+*/
+async function userRegisterController(req, res) {
+    const { email, password, name } = req.body
 
-// POST /api/auth/register
-async function userRegistrationController(req,res){
-    
-    const {email,password,name} = req.body;
+    const isExists = await userModel.findOne({
+        email: email
+    })
 
-    const usrExitsts = await userModel.findOne({email:email});
-
-    if(usrExitsts){
+    if (isExists) {
         return res.status(422).json({
-            message:"User Already Exists With This Email",
-            status:"Failed"
-        });
+            message: "User already exists with email.",
+            status: "failed"
+        })
     }
 
     const user = await userModel.create({
-        email,password,name
-    });
+        email, password, name
+    })
 
-    const token = jwt.sign({userId:user._id},process.env.JWT_SECRET);
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "3d" })
 
-    res.cookies("token",token);
+    res.cookie("token", token)
 
     res.status(201).json({
-        message:"User Created Successfully",
-        user:{
-            _id:user._id,
-            email:user.email,
-            name : user.name,
+        user: {
+            _id: user._id,
+            email: user.email,
+            name: user.name
         },
         token
     })
+
+    await emailService.sendRegistrationEmail(user.email, user.name)
 }
-// POST /api/auth/login
-async function userLoginController(req,res){
 
-    //get email and password from body 
-    const {email,password} = req.body;
+/**
+ * - User Login Controller
+ * - POST /api/auth/login
+  */
 
-    // get user details by email 
-    const user = await userModel.findOne({email}).select("+password");
+async function userLoginController(req, res) {
+    const { email, password } = req.body
 
-    // if user doest not exists then we send back the unauthorized response
-    if(!user){
-        return res.status(400).json({
-            message:"Unauthorized"
-        });
+    const user = await userModel.findOne({ email }).select("+password")
+
+    if (!user) {
+        return res.status(401).json({
+            message: "Email or password is INVALID"
+        })
     }
-    // if user is valid then we check if the passwrod is valid or not
-    const isPasswordValid = await userModel.comparePassword(password);
-    //we compared the password and then stored it in a boolean 
-    //we check that boolean's value to check if the password is correct or not
-    if(!isPasswordValid){
-        return res.status(400).json({
-          message: "Unauthorized",
-        });
-    };
 
-    //password is valid too so then we give them the token 
-     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-    //it is always stored in cookies
-     res.cookies("token", token);
-    //send the response after the token is given 
-      res.status(200).json({
-        message: "User Login Successful",
+    const isValidPassword = await user.comparePassword(password)
+
+    if (!isValidPassword) {
+        return res.status(401).json({
+            message: "Email or password is INVALID"
+        })
+    }
+
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "3d" })
+
+    res.cookie("token", token)
+
+    res.status(200).json({
         user: {
-          _id: user._id,
-          email: user.email,
-          name: user.name,
+            _id: user._id,
+            email: user.email,
+            name: user.name
         },
-        token,
-      });
+        token
+    })
+
 }
 
-module.exports = {userRegistrationController,userLoginController};
+
+/**
+ * - User Logout Controller
+ * - POST /api/auth/logout
+  */
+async function userLogoutController(req, res) {
+    const token = req.cookies.token || req.headers.authorization?.split(" ")[ 1 ]
+
+    if (!token) {
+        return res.status(200).json({
+            message: "User logged out successfully"
+        })
+    }
+
+
+
+    await tokenBlackListModel.create({
+        token: token
+    })
+
+    res.clearCookie("token")
+
+    res.status(200).json({
+        message: "User logged out successfully"
+    })
+
+}
+
+
+module.exports = {
+    userRegisterController,
+    userLoginController,
+    userLogoutController
+}

@@ -7,6 +7,6 @@ console.log(catMe());
 
 connectDB();
 
-app.listen(3000,()=>{
-    console.log("Backend Running 🚀");
+app.listen(process.env.PORT || 3000,()=>{
+    console.log(`Backend Running on port ${process.env.PORT || 3000} 🚀`);
 });
